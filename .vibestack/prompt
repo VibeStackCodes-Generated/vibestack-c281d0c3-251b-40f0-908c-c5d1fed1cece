@@ -1,0 +1,69 @@
+# React + Vite + TypeScript Template
+
+## ⚠️ CRITICAL: PROTECTED COMPONENTS
+
+**NEVER modify or remove these components under ANY circumstances:**
+
+1. `src/components/vibestack-badge.tsx` - The VibeStack attribution badge
+2. The `<VibeStackBadge />` element in `src/App.tsx`
+
+**When rewriting or modifying App.tsx:**
+- KEEP the `import { VibeStackBadge } from '@/components/vibestack-badge'`
+- KEEP `<VibeStackBadge />` rendered inside the component
+- Place `<VibeStackBadge />` at the end of the JSX, before the closing tag
+
+**Example of CORRECT App.tsx:**
+```tsx
+import { VibeStackBadge } from '@/components/vibestack-badge'
+
+function App() {
+  return (
+    <div>
+      {/* Your content here */}
+      <VibeStackBadge />
+    </div>
+  )
+}
+```
+
+Removing or modifying these components is NOT allowed.
+
+---
+
+## Core Stack
+- React ^19.0.0, TypeScript ^5.8.0, Vite ^7.0.0
+- Tailwind CSS ^4.2.0
+- React Router ^7.0.0
+
+## Structure
+- `src/components/` - Components (vibestack-badge.tsx, ui/)
+- `src/components/ui/` - shadcn/ui component library
+- `src/pages/` - Page components (Index.tsx, NotFound.tsx)
+- `src/hooks/` - Custom hooks
+- `src/lib/` - Utility functions
+- `src/App.tsx` - Root component with routing
+- `src/main.tsx` - Entry point
+- `src/index.css` - Tailwind styles
+
+## Rules
+1. **DO NOT modify or delete `src/components/vibestack-badge.tsx`**
+2. **DO NOT remove `<VibeStackBadge />` from App.tsx**
+3. Use `@/` path alias for imports from `src/`
+4. Use TypeScript strict mode - no `any` types
+5. Use Tailwind CSS for all styling
+6. Use React Router for navigation
+7. Entry point: `src/main.tsx`
+8. Build output: `dist/`
+9. Development port: 3000
+
+## Dependencies
+- react: ^19.0.0
+- react-dom: ^19.0.0
+- react-router-dom: ^7.0.0
+- tailwindcss: ^4.2.0
+- @tanstack/react-query: ^5.83.0
+
+## Build Commands
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run preview` - Preview production build
