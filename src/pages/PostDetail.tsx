@@ -1,19 +1,31 @@
 import { useParams, Link, useNavigate } from "react-router-dom";
-import { ArrowLeft, Calendar, Clock, MapPin, Share2, Heart } from "lucide-react";
+import { ArrowLeft, Calendar, Clock, MapPin, Share2, Heart, Trash2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { format } from "date-fns";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
-import { getPostById, posts } from "@/data/posts";
+import { usePostStore } from "@/hooks/usePostStore";
 import PostCard from "@/components/PostCard";
 import NewsletterSignup from "@/components/NewsletterSignup";
 import { useState } from "react";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 export default function PostDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { getPostById, posts, deletePost } = usePostStore();
   const post = getPostById(id || "");
   const [liked, setLiked] = useState(false);
 
@@ -35,6 +47,12 @@ export default function PostDetail() {
   const handleShare = () => {
     navigator.clipboard.writeText(window.location.href);
     toast.success("Link copied to clipboard!");
+  };
+
+  const handleDelete = () => {
+    deletePost(post.id);
+    toast.success("Post deleted");
+    navigate("/");
   };
 
   const renderContent = (content: string) => {
@@ -173,6 +191,28 @@ export default function PostDetail() {
                 Share
               </Button>
             </div>
+            <AlertDialog>
+              <AlertDialogTrigger asChild>
+                <Button variant="ghost" size="sm" className="gap-2 text-destructive hover:text-destructive hover:bg-destructive/10">
+                  <Trash2 className="w-4 h-4" />
+                  Delete
+                </Button>
+              </AlertDialogTrigger>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>Delete this post?</AlertDialogTitle>
+                  <AlertDialogDescription>
+                    This will permanently remove "{post.title}" from the blog. This action cannot be undone.
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel>Cancel</AlertDialogCancel>
+                  <AlertDialogAction onClick={handleDelete} className="bg-destructive text-destructive-foreground hover:bg-destructive/90">
+                    Delete
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
           </div>
         </div>
 

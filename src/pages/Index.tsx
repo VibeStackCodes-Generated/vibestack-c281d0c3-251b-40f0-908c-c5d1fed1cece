@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { posts, getFeaturedPosts } from "@/data/posts";
+import { usePostStore } from "@/hooks/usePostStore";
 import HeroPost from "@/components/HeroPost";
 import PostCard from "@/components/PostCard";
 import NewsletterSignup from "@/components/NewsletterSignup";
@@ -18,6 +18,7 @@ const item = {
 };
 
 export default function Index() {
+  const { posts, getFeaturedPosts } = usePostStore();
   const featured = getFeaturedPosts();
   const recentPosts = posts.filter((p) => !p.featured);
 

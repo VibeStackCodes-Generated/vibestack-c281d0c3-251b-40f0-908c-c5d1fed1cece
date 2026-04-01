@@ -5,7 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import NewsletterSignup from "@/components/NewsletterSignup";
 import PostCard from "@/components/PostCard";
-import { posts } from "@/data/posts";
+import { usePostStore } from "@/hooks/usePostStore";
 
 const timeline = [
   { year: "2016", title: "First Solo Trip", description: "Backpacked through Southeast Asia for 3 months. Fell in love with the world." },
@@ -16,6 +16,8 @@ const timeline = [
 ];
 
 export default function About() {
+  const { posts } = usePostStore();
+
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
       {/* Hero Section */}

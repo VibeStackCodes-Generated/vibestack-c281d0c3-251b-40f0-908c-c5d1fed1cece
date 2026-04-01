@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Globe } from "lucide-react";
+import { Menu, X, Globe, PenLine } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const navLinks = [
@@ -36,6 +36,16 @@ export default function Navbar() {
                 </Button>
               </Link>
             ))}
+            <Link to="/new">
+              <Button
+                variant={location.pathname === "/new" ? "default" : "outline"}
+                size="sm"
+                className="text-sm font-medium gap-1.5 ml-2"
+              >
+                <PenLine className="w-3.5 h-3.5" />
+                Write
+              </Button>
+            </Link>
           </div>
 
           <Button
@@ -66,6 +76,18 @@ export default function Navbar() {
                 {link.label}
               </Link>
             ))}
+            <Link
+              to="/new"
+              onClick={() => setMobileOpen(false)}
+              className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                location.pathname === "/new"
+                  ? "bg-primary text-primary-foreground"
+                  : "text-foreground hover:bg-muted"
+              }`}
+            >
+              <PenLine className="w-3.5 h-3.5" />
+              Write a Story
+            </Link>
           </div>
         </div>
       )}

@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { MapPin, Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { posts, categories } from "@/data/posts";
+import { usePostStore } from "@/hooks/usePostStore";
 import PostCard from "@/components/PostCard";
 
 const container = {
@@ -20,6 +20,7 @@ const item = {
 };
 
 export default function Destinations() {
+  const { posts, categories } = usePostStore();
   const [activeCategory, setActiveCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
 
